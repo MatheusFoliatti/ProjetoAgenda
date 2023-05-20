@@ -8,9 +8,7 @@ export default function App() {
   async function handleButton () {
     console.log('Função');
 
-
-
-  const resultAPI = await api.get('/')
+   const resultAPI = await api.get('/')
 
    const user = resultAPI.data.results[0]
 
