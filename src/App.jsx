@@ -1,18 +1,32 @@
 import { useState } from "react"
-import { api } from "./api/axios"
+import { api, server } from "./api/axios"
 
 export default function App() {
 
   const [dataRequest, setDataRequest] = useState("")
 
   async function handleButton () {
-    const resultAPI = await api.get('/')
+    console.log('Função');
 
-    const user = resultAPI.data.results[0]
 
-    const nameFull = `${user.name.first} ${user.name.last}`
 
-    setDataRequest(nameFull)
+  const resultAPI = await api.get('/')
+
+   const user = resultAPI.data.results[0]
+
+   const nameFull = `${user.name.first} ${user.name.last}`
+
+   const userEmail = user.email
+
+   const resultSERVER = await server.post("user/", {
+    name: nameFull,
+    email: userEmail
+  })
+  
+   setDataRequest(nameFull)
+
+   console.log(resultSERVER)
+   console.log(user)
   }
 
   return (
